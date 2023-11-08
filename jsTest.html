@@ -8,26 +8,22 @@
     <p id="potSizeText">Loading...</p>
 
     <script>
-        // Function to fetch the raffle.potSize.formatted and update the text
-        function fetchAndDisplayPotSize() {
-            fetch("https://raffle.link/canadinnsfoundation/raffle/current/pot.json")
-                .then(response => response.json())
-                .then(data => {
-                    const potSizeFormatted = data.raffle.potSize.formatted;
-                    // Update the text in the HTML element
-                    document.getElementById("potSizeText").textContent = "Pot Size: " + potSizeFormatted;
-                })
-                .catch(error => {
-                    console.error("Error fetching JSON data:", error);
-                    document.getElementById("potSizeText").textContent = "Error fetching data.";
-                });
-        }
-
-        // Call the function when the page loads
-        fetchAndDisplayPotSize();
-
-        // Periodically update the pot size (every 5 seconds in this example)
-        setInterval(fetchAndDisplayPotSize, 5000);
+function updatePotAmount() {
+    fetch('https://raffle.link/canadinnsfoundation/raffle/current/pot.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const potAmount = Math.floor(data.raffle.potSize.amount / 100); // Divide by 100 and round down
+            document.getElementById('pot-amount').textContent = `Current Pot Amount: $${potAmount}`;
+        })
+        .catch(error => {
+            console.error('Error fetching data: ', error);
+        });
+}
     </script>
 </body>
 </html>
