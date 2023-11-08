@@ -55,8 +55,8 @@
                 .then(response => response.json())
                 .then(data => {
                     const formattedAmount = data.raffle.potSize.formatted; // Use the formatted property
-                    const dollarsOnly = formattedAmount.replace(/(\$|,|\..*)/g, ''); // Remove cents and decimal
-                    document.getElementById('pot-amount').textContent = `$${dollarsOnly}`;
+                    const withoutCents = formattedAmount.replace(/\..*/g, ''); // Remove .00 at the end
+                    document.getElementById('pot-amount').textContent = `Current Pot Amount: ${withoutCents}`;
                 })
                 .catch(error => {
                     console.error('Error fetching data: ', error);
