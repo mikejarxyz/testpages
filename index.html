@@ -54,8 +54,9 @@
             fetch('https://raffle.link/canadinnsfoundation/raffle/current/pot.json')
                 .then(response => response.json())
                 .then(data => {
-                    const potAmount = data.raffle.potSize.amount; // No rounding or formatting
-                    document.getElementById('pot-amount').textContent = `$${potAmount}`;
+                    const formattedAmount = data.raffle.potSize.formatted; // Use the formatted property
+                    const dollarsOnly = formattedAmount.replace(/(\$|,|\..*)/g, ''); // Remove cents and decimal
+                    document.getElementById('pot-amount').textContent = `Current Pot Amount: ${dollarsOnly}`;
                 })
                 .catch(error => {
                     console.error('Error fetching data: ', error);
