@@ -29,10 +29,8 @@
 
         .text {
             position: absolute;
-            top: 810px;
-            transform: translateY(-100%); /* Align bottom from the top */
-            left: 1563px;
-            transform: translateX(-100%); /* Align right from the left */
+            bottom: calc(100% - 810px); /* Align bottom from the top */
+            right: calc(100% - 1563px); /* Align right from the left */
             z-index: 1;
             color: #ED176E;
             text-align: right; /* Right-align the text */
@@ -47,7 +45,7 @@
 <body>
     <div class="video-container">
         <video autoplay muted loop>
-            <source src="https://3828967.fs1.hubspotusercontent-na1.net/hubfs/3828967/LivePotScreen.mp4" type="video/mp4">
+            <source src="https://3828967.fs1.hubspotusercontent-na1.net/hubfs/3828967/LivePotScreen_1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <div class="text" id="pot-amount">
