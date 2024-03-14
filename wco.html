@@ -29,12 +29,14 @@
 
         .text {
             position: absolute;
-            bottom: calc(100% - 810px); /* Align bottom from the top */
-            right: calc(100% - 1563px); /* Align right from the left */
+            top: 810px;
+            transform: translateY(-100%); /* Align bottom from the top */
+            left: 1563px;
+            transform: translateX(-100%); /* Align right from the left */
             z-index: 1;
             color: #ED176E;
             text-align: right; /* Right-align the text */
-            font-size: 275px;
+            font-size: 380px;
             font-family: "brandon-grotesque", sans-serif;
             font-weight: 900;
             font-style: normal;
