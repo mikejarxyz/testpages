@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Pot Size</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .upper-left {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2.5rem;
+        }
+        .middle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 8rem;
+        }
+        .bottom-left {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="upper-left">50/50 Pot Size:</div>
+        <div class="middle" id="pot-amount">Loading...</div>
+        <div class="bottom-left">
+            <div>Winner gets half</div>
+            <div>LGCA LICENCE#</div>
+        </div>
+    </div>
+
+<script>
+        function updatePotAmount() {
+            fetch('https://raffle.link/blueberryjam/raffle/current/pot.json')
+                .then(response => response.json())
+                .then(data => {
+                    const formattedAmount = data.raffle.potSize.formatted; // Use the formatted property
+                    const withoutCents = formattedAmount.replace(/\..*/g, ''); // Remove .00 at the end
+                    document.getElementById('pot-amount').textContent = `${withoutCents}`;
+                })
+                .catch(error => {
+                    console.error('Error fetching data: ', error);
+                });
+        }
+
+        // Initial update
+        updatePotAmount();
+
+        // Periodically refresh every 5 seconds
+        setInterval(updatePotAmount, 5000);
+    </script>
+</body>
+</html>
